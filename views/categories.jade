@@ -1,0 +1,28 @@
+extends layout
+block content
+    h1= title
+    div.main-categories
+        div.main-categories-ctn
+            -if (categories.length)
+               -each category in categories
+                  div.list-articles-item.thumbnail.clearfix
+                     a(href="/categories/#{category._id}")
+                     h3!= category.title
+                     p!= category.description
+            -else
+               br
+               p Список категорий пуст.
+    div#add-category
+        h2 Добавить категорию
+        form.form.form-add-article(method="POST")
+            .form-group
+                label.control-label(for='title-category') Название категории
+                input#title-category.form-control(type='text', placeholder='title' name="titleCategory" required="")
+            .form-group
+                label.control-label(for='name-class-category') Название класса css
+                input#name-class-category.form-control(type='text', placeholder='name class category' name="nameClassCategory" required="")
+            .form-group
+                label.control-label(for='description-category') Описание категории
+                textarea#description-category.form-control(placeholder='description' name="descriptionCategory" required="")
+            .form-group.clearfix
+                button.btn.btn-info(type='submit').right Добавить категорию

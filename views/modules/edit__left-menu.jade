@@ -1,0 +1,15 @@
+-var mainMenu = [];
+-mainMenu[0] = {title: 'Начало', url: '/edit'};
+-mainMenu[1] = {title: 'Категории', url: '/edit/categories'};
+-mainMenu[2] = {title: 'Подкатегории', url: '/edit/subcategories'};
+-mainMenu[3] = {title: 'Статьи', url: '/edit/articles'};
+
+ul.nav.nav-sidebar
+   -console.log(url_path);
+   -each item in mainMenu
+      if (url_path == item.url)
+         li.active
+            span= item.title
+      else
+         li
+            a(href=item.url)= item.title
