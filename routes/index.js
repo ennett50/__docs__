@@ -17,7 +17,10 @@ var editDataSites = require('./modules/edit/index.js'),
     addArticles = require('./modules/edit/articles-add.js'),
     categories__Index = require('./modules/index/index.js'),
     categories__List = require('./modules/index/list-subcategories.js'),
-    subCategories__List = require('./modules/index/detail-subcategories.js');
+    subCategories__List = require('./modules/index/detail-subcategories.js'),
+    categories_edit = require('./modules/edit/edit-categories.js'),
+    categories_put =  require('./modules/edit/put-categories.js'),
+    categories_delete = require('./modules/edit/delete-categories.js');
 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -97,6 +100,9 @@ router.get('/edit/', function(req, res){
     res.render('edit/index', { title: 'Редактирование данных'});
 });
 router.get('/edit/categories/', categories);
+router.route('/edit/category/:id').get(categories_edit);
+router.route('/edit/category/:id').put(categories_put);
+router.route('/edit/category/:id').delete(categories_delete);
 router.post('/edit/categories/', addCategories);
 
 router.get('/edit/subcategories/', subcategories);
