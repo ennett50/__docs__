@@ -3,26 +3,32 @@ block vars
 	-var editTpl = true
 block content
 	h1= title
-
 	table.table.table-striped.table-bordered
 		tr
-			th Id
+			th(width=250) Id
+			th(width=160) Категория
 			th Название
 			th Описание
 			th Картинка
 			th Дата
 			th(width=100)
-		-if (categories.length)
-			-each category in categories
+
+		-if (subcategories.length)
+			-each category in subcategories
 				tr
 					td= category._id
+					td
+						a(href="/categories/#{category.category_id}" target="_blank")= category.category_name[0].title
+
 					td= category.title
 					td= category.description
 					td
-						-if (category.img)
+						-if (category.img !== undefined)
 							img(src="/uploads/#{category.img}" alt=category.title).img_max-200
 						-else
 							img(src="/images/default.png" alt=category.title).img_max-200
+
+
 					-var date = category.created.toISOString();
 					td #{date.substring(0, date.indexOf('T'))} #{date.substring(date.indexOf('T')+1, date.indexOf('.'))}
 					td
@@ -35,5 +41,4 @@ block content
 				td(colspan="6") Список категорий пуст
 
 
-	include ../modules/edit__add-categories
-
+	include ../modules/edit__add-subcategories

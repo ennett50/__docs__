@@ -1,0 +1,34 @@
+extends ../layout
+block vars
+	-var editTpl = true
+block content
+	h1= title
+	table.table.table-striped.table-bordered
+		tr
+			th Id
+			th Название
+			th Категория
+			//th Описание
+			th Дата
+			th(width=100)
+		-if (articles.length)
+			-each article in articles
+				tr
+					td= article._id
+					td
+						a(href="/articles/#{article._id}" target="_blank")= article.title
+					td
+						a(href="/categories/#{article.category_id}" target="_blank")= article.category_name[0].title
+					//td= article.description
+
+					-var date = article.created.toISOString();
+					td #{date.substring(0, date.indexOf('T'))} #{date.substring(date.indexOf('T') + 1, date.indexOf('.'))}
+					td
+						a(href="/edit/articles/#{article._id}") Edit
+						br
+						a(href="/edit/articles/#{article._id}") Delete
+		-else
+			tr
+				td(colspan="6") Список статей пуст
+
+	include ../modules/edit__add-articles

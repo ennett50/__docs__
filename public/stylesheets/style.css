@@ -156,10 +156,13 @@ textarea.form-control {
   background-color: #d9d9d9;
   outline: 0;
 }
+.max-width-80 {
+  max-width: 80%;
+  margin: 0 auto 50px;
+}
 .categories-list {
   position: relative;
   margin: 0 auto 50px;
-  max-width: 80%;
 }
 .categories-list a {
   transition: all 0.3s;

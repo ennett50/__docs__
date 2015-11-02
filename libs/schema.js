@@ -8,16 +8,11 @@ var mongoose = require('mongoose');
 var articleSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
-        unique: true
-    },
-    previewText : {
-        type:     String,
-        unique:   true
+        required: true
     },
     description:   {
         type:     String,
-        unique:   true
+        required: true
     },
     created: {
         type: Date,
@@ -26,16 +21,20 @@ var articleSchema = new mongoose.Schema({
     numberSort: {
         type: Number,
         default: Date.now()
-    }
+    },
+    category_id: {
+        type: String,
+        required: true
+    },
+    category_name: {
+        type: Object,
+        required: true
+    },
 });
 
 
 //поля для отображения главных категорий
 var categoriesSchema = new mongoose.Schema({
-    activationId: {
-        type: mongoose.Schema.ObjectId,
-        default: mongoose.Types.ObjectId
-    },
     title: {
         type: String,
         required: true,
@@ -47,9 +46,7 @@ var categoriesSchema = new mongoose.Schema({
         unique: true
     },
     img: {
-        type: String,
-        required: true,
-        unique: true
+        type: String
     },
     created: {
         type: Date,
@@ -57,5 +54,34 @@ var categoriesSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Article', articleSchema);
+
+//поля для отображения подкатегонрий
+var subCategoriesSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    category_name: {
+        type: Object,
+        required: true
+    },
+    category_id : {
+        type: String,
+        required: true
+    },
+    img: {
+        type: String
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    }
+});
+module.exports = mongoose.model('articles', articleSchema);
 module.exports = mongoose.model('categories', categoriesSchema);
+module.exports = mongoose.model('subcategories', subCategoriesSchema);

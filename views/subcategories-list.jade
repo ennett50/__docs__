@@ -1,12 +1,17 @@
 extends layout
-
 block content
-	h1.text-center= title
+
+	a(href="/") ← Назад
+	h1= title
+	p.small= date_created
+	p= description
+
+
 	div.categories-list.clearfix
-		-if (categories.length)
-			-each category in categories
+		-if (subcategories.length)
+			-each category in subcategories
 				div.clearfix.categories-list-item
-					a(href="/categories/#{category._id}")
+					a(href="/subcategories/#{category._id}")
 						h3!= category.title
 						div.categories-list-img
 							-if (category.img)
@@ -17,12 +22,3 @@ block content
 		-else
 			br
 			p Список категорий пуст.
-
-	h2 Последние добавленные статьи
-	p В разработке
-
-	br
-	br
-
-	h2 Что это такое?
-	p В разработке

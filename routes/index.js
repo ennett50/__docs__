@@ -10,8 +10,13 @@ var express = require('express'),
 //special modules
 var editDataSites = require('./modules/edit/index.js'),
     categories = require('./modules/edit/categories.js'),
+    subcategories = require('./modules/edit/subcategories.js'),
+    articles = require('./modules/edit/articles.js'),
     addCategories = require('./modules/edit/categories-add.js'),
-    categories__Index = require('./modules/index/index.js');
+    addSubCategories =  require('./modules/edit/subcategories-add.js'),
+    addArticles = require('./modules/edit/articles-add.js'),
+    categories__Index = require('./modules/index/index.js'),
+    categories__List = require('./modules/index/list-subcategories.js');
 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -22,8 +27,40 @@ router.use(methodOverride(function (req, res) {
     }
 }));
 
+router.param('id', function (req, res, next, id) {
+    //console.log('validating ' + id + ' exists');
+    //find the ID in the Database
+    mongoose.model('categories').findById(id, function (err, article) {
+        //if it isn't found, we are going to repond with 404
+        if (err) {
+            console.log(id + ' was not found');
+            res.status(404)
+            var err = new Error('Not Found');
+            err.status = 404;
+            res.format({
+                html: function () {
+                    next(err);
+                },
+                json: function () {
+                    res.json({message: err.status + ' ' + err});
+                }
+            });
+            //if it is found we continue on
+        } else {
+            req.id = id;
+            // go to the next thing
+            next();
+        }
+    });
+});
+
+
+
+
+
 //index page
 router.get('/', categories__Index);
+router.route('/categories/:id').get(categories__List);
 
 
 //edit all data on site
@@ -32,5 +69,12 @@ router.get('/edit/', function(req, res){
 });
 router.get('/edit/categories/', categories);
 router.post('/edit/categories/', addCategories);
+
+router.get('/edit/subcategories/', subcategories);
+router.post('/edit/subcategories/', addSubCategories);
+
+
+router.get('/edit/articles/', articles);
+router.post('/edit/articles/', addArticles);
 
 module.exports = router;

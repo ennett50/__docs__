@@ -1,0 +1,28 @@
+div#add-subcategory
+	h3 Добавить подкатегорию
+	form.form.form-add-article.well(method="POST" )
+		div.row
+			div.form-group.col-md-6.col-xs-6
+				label.control-label(for='title-subcategory') Название подкатегории
+				input#title-subcategory.form-control(type='text',name="titleSubCategory" required="")
+
+			div.form-group.col-md-6.col-xs-6
+				label.control-label(for='img-subcategory') Картинка подкатегории
+				input#img-subcategory(type='file' name="imgSubCategory")
+
+		div.row
+			div.form-group.col-md-12.col-xs-12
+				label.control-label(for='name-category') Выберите категорию
+				select#name-category(name="nameCategory" required="").form-control
+					option Выберите
+					-each category in categories
+						option(value="#{category._id}")= category.title
+
+		div.row
+			div.form-group.col-md-12.col-xs-12
+				label.control-label(for='description-subcategory') Описание подкатегории
+				textarea#description-subcategory.form-control(name="descriptionSubCategory" required="")
+
+		div.row
+			div.form-group.clearfix.col-md-12.col-xs-12
+				button.btn.btn-success(type='submit') Добавить категорию
