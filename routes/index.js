@@ -16,7 +16,8 @@ var editDataSites = require('./modules/edit/index.js'),
     addSubCategories =  require('./modules/edit/subcategories-add.js'),
     addArticles = require('./modules/edit/articles-add.js'),
     categories__Index = require('./modules/index/index.js'),
-    categories__List = require('./modules/index/list-subcategories.js');
+    categories__List = require('./modules/index/list-subcategories.js'),
+    subCategories__List = require('./modules/index/detail-subcategories.js');
 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -55,12 +56,40 @@ router.param('id', function (req, res, next, id) {
 });
 
 
+router.param('id', function (req, res, next, id) {
+    //console.log('validating ' + id + ' exists');
+    //find the ID in the Database
+    mongoose.model('subcategories').findById(id, function (err, article) {
+        //if it isn't found, we are going to repond with 404
+        if (err) {
+            console.log(id + ' was not found');
+            res.status(404)
+            var err = new Error('Not Found');
+            err.status = 404;
+            res.format({
+                html: function () {
+                    next(err);
+                },
+                json: function () {
+                    res.json({message: err.status + ' ' + err});
+                }
+            });
+            //if it is found we continue on
+        } else {
+            req.id = id;
+            // go to the next thing
+            next();
+        }
+    });
+});
+
 
 
 
 //index page
 router.get('/', categories__Index);
 router.route('/categories/:id').get(categories__List);
+router.route('/subcategories/:id').get(subCategories__List);
 
 
 //edit all data on site

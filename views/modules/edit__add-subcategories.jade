@@ -20,8 +20,14 @@ div#add-subcategory
 
 		div.row
 			div.form-group.col-md-12.col-xs-12
+				label.control-label(for='preview-subcategory') Превью подкатегории
+				textarea#preview-subcategory.form-control.small-textarea(name="previewSubCategory" required="")
+
+
+		div.row
+			div.form-group.col-md-12.col-xs-12
 				label.control-label(for='description-subcategory') Описание подкатегории
-				textarea#description-subcategory.form-control(name="descriptionSubCategory" required="")
+				textarea#description-subcategory.js-wysihtml5.form-control(name="descriptionSubCategory" required="")
 
 		div.row
 			div.form-group.clearfix.col-md-12.col-xs-12

@@ -10,6 +10,7 @@ var addSubCategories = function (req, res,  next) {
     var title = req.body.titleSubCategory,
         description = req.body.descriptionSubCategory,
         img = req.body.imgSubCategory,
+        preview = req.body.previewSubCategory,
         category_id = req.body.nameCategory;
 
 
@@ -23,6 +24,7 @@ var addSubCategories = function (req, res,  next) {
                 title: title,
                 description: description,
                 img: img,
+                preview: preview,
                 category_name : name_categories,
                 category_id: category_id
 

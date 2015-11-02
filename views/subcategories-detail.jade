@@ -1,0 +1,9 @@
+extends layout
+block vars
+	-var detailSubCategory = true
+block content
+	a(href="/categories/#{category_id}") ← Назад
+	h1= title
+	p.small= date_created
+
+	!= description

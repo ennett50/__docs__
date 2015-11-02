@@ -2,10 +2,13 @@ div#add-articles
 	h3 Добавить статью
 	form.form.form-add-article.well(method="POST" )
 		div.row
-			div.form-group.col-md-6.col-xs-6
+			div.form-group.col-md-12.col-xs-12
 				label.control-label(for='title-articles') Название статьи
 				input#title-articles.form-control(type='text', name="titleArticles" required="")
 
+
+
+		div.row
 			div.form-group.col-md-6.col-xs-6
 				label.control-label(for='name-category') Выберите категорию
 				select#name-category(name="nameCategory" required="").form-control
@@ -13,10 +16,17 @@ div#add-articles
 					-each category in categories
 						option(value="#{category._id}")= category.title
 
+			div.form-group.col-md-6.col-xs-6
+				label.control-label(for='name-category') Выберите подкатегорию
+				select#name-category(name="nameSubCategory" required="").form-control
+					option Выберите
+					-each subcategory in subcategories
+						option(value="#{subcategory._id}")= subcategory.title
+
 		div.row
 			div.form-group.col-md-12.col-xs-12
-				label.control-label(for='title-articles') Описание статьи
-				textarea#description-articles.form-control.js-wysihtml5(name="descriptionArticles" required="")
+				label.control-label(for='link-articles') Ссылка статьи
+				input#link-articles.form-control(name="linkArticles" required="")
 
 		div.row
 			div.form-group.clearfix.col-md-12.col-xs-12

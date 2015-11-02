@@ -7,7 +7,8 @@ block content
 		tr
 			th Id
 			th Название
-			th Категория
+
+			th Подкатегория / Категория
 			//th Описание
 			th Дата
 			th(width=100)
@@ -16,8 +17,13 @@ block content
 				tr
 					td= article._id
 					td
-						a(href="/articles/#{article._id}" target="_blank")= article.title
+						p= article.title
+						a(href="/articles/#{article._id}" target="_blank")= article.link
 					td
+						a(href="/subcategories/#{article.subcategory_id}" target="_blank")= article.subcategory_name[0].title
+						!='\n'
+						span /
+						!='\n'
 						a(href="/categories/#{article.category_id}" target="_blank")= article.category_name[0].title
 					//td= article.description
 
@@ -29,6 +35,6 @@ block content
 						a(href="/edit/articles/#{article._id}") Delete
 		-else
 			tr
-				td(colspan="6") Список статей пуст
+				td(colspan="5") Список статей пуст
 
 	include ../modules/edit__add-articles

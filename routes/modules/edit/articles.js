@@ -6,29 +6,40 @@ var articles = function(req, res, next){
         if (err) {
             return console.error(err);
         } else {
-            mongoose.model('articles').find({}, function(err, articles){
+            mongoose.model('subcategories').find({}, function(err, subcategories){
                 if (err) {
                     return console.error(err);
                 } else {
-                    res.format({
-                        //HTML response will render the index.jade file in the views/blobs folder. We are also setting "articles" to be an accessible variable in our jade view
-                        html: function () {
-                            res.render('edit/articles', {
-                                title: 'Статьи',
-                                "articles": articles,
-                                //for from add articles
-                                "categories" : categories
+                    mongoose.model('articles').find({}, function(err, articles){
+                        if (err) {
+                            return console.error(err);
+                        } else {
+
+
+
+                            res.format({
+                                //HTML response will render the index.jade file in the views/blobs folder. We are also setting "articles" to be an accessible variable in our jade view
+                                html: function () {
+                                    res.render('edit/articles', {
+                                        title: 'Статьи',
+                                        "articles": articles,
+                                        //for from add articles
+                                        "categories" : categories,
+                                        "subcategories" : subcategories
+                                    });
+                                },
+                                //JSON response will show all blobs in JSON format
+                                json: function () {
+                                    res.json(articles);
+                                }
+
+
                             });
-                        },
-                        //JSON response will show all blobs in JSON format
-                        json: function () {
-                            res.json(articles);
                         }
-
-
                     });
                 }
             });
+
         }
 
     });

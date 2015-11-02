@@ -1,0 +1,10 @@
+if (articles.length)
+	ul.nav.nav-sidebar
+		-each item in articles
+			li
+				a(href=item.link target="blank").nav-sidebar_block
+					span.nav-sidebar_link!= item.title
+					span.nav-sidebar_no-link= item.link
+
+else
+	p Материалов пока не добавлено

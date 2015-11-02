@@ -10,7 +10,7 @@ var articleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description:   {
+    link:   {
         type:     String,
         required: true
     },
@@ -27,6 +27,14 @@ var articleSchema = new mongoose.Schema({
         required: true
     },
     category_name: {
+        type: Object,
+        required: true
+    },
+    subcategory_id: {
+        type: String,
+        required: true
+    },
+    subcategory_name: {
         type: Object,
         required: true
     },
@@ -58,6 +66,10 @@ var categoriesSchema = new mongoose.Schema({
 //поля для отображения подкатегонрий
 var subCategoriesSchema = new mongoose.Schema({
     title: {
+        type: String,
+        required: true
+    },
+    preview: {
         type: String,
         required: true
     },
