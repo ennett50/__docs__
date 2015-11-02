@@ -1,3 +1,4 @@
+block vars
 doctype html
 html
 	head
@@ -21,6 +22,15 @@ html
 		include include/header
 		section
 			div.container-fluid
-				block content
+				//шаблон редактирования
+				if (editTpl)
+					div.row
+						div.col-sm-3.col-md-2.sidebar
+							include modules/edit__left-menu
+						div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+							block content
+				else
+					//обычный шаблон
+					block content
 
 		include include/footer

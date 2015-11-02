@@ -8,7 +8,10 @@ var express = require('express'),
     url = require("url");
 
 //special modules
-var editDataSites = require('./modules/edit/index.js');
+var editDataSites = require('./modules/edit/index.js'),
+    categories = require('./modules/edit/categories.js'),
+    addCategories = require('./modules/edit/categories-add.js'),
+    categories__Index = require('./modules/index/index.js');
 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -19,10 +22,15 @@ router.use(methodOverride(function (req, res) {
     }
 }));
 
+//index page
+router.get('/', categories__Index);
+
+
 //edit all data on site
 router.get('/edit/', function(req, res){
-    res.render('edit', { title: 'Редактирование данных'});
+    res.render('edit/index', { title: 'Редактирование данных'});
 });
-
+router.get('/edit/categories/', categories);
+router.post('/edit/categories/', addCategories);
 
 module.exports = router;

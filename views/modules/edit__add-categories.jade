@@ -1,0 +1,20 @@
+div#add-category
+	h3 Добавить категорию
+	form.form.form-add-article.well(method="POST" )
+		div.row
+			div.form-group.col-md-6.col-xs-6
+				label.control-label(for='title-category') Название категории
+				input#title-category.form-control(type='text',name="titleCategory" required="")
+
+			div.form-group.col-md-6.col-xs-6
+				label.control-label(for='img-category') Картинка категории
+				input#img-category(type='file' name="imgCategory" required="")
+
+		div.row
+			div.form-group.col-md-12.col-xs-12
+				label.control-label(for='description-category') Описание категории
+				textarea#description-category.form-control(name="descriptionCategory" required="")
+
+		div.row
+			div.form-group.clearfix.col-md-12.col-xs-12
+				button.btn.btn-success(type='submit') Добавить категорию

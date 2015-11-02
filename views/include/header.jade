@@ -1,16 +1,12 @@
 header.navbar.navbar-inverse.navbar-fixed-top.js-scroll-to(role='navigation')
-	.container.clearfix
+	.container-fluid.clearfix
 		-if ( pathname == '/')
 			span.navbar-brand
 				img(src="/images/logo.png" alt="#{title}" title="#{title}")
+			span.navbar-brand __Docs__
 		-else
-			a(href="/").navbar-brand
-				img(src="/images/logo.png" alt="#{title}" title="#{title}")
-		-if ( pathname == '/')
-			a(href="#add-articles").navbar-brand.right.js-scroll-to Добавить статью
-		-else
-			a(href="/").navbar-brand На главную
+			a(href="/")
+				span.navbar-brand
+					img(src="/images/logo.png" alt="#{title}" title="#{title}")
+				span.navbar-brand __Docs__
 
-
-		-if (pathnameArticles == '/articles/')
-			a(href="/articles/").navbar-brand.right Список статей

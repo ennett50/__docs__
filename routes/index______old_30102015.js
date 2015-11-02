@@ -7,8 +7,8 @@ var url = require("url");
 var articlesList = require('./modules/articles-list.js');
 var getPostArticles = require('./modules/get-post-articles.js');
 
-var mainCategory = require('./modules/main/main-category.js');
-var getPostMainCategory = require('./modules/main/main-category-add.js');
+var mainCategory = require('./modules/index/index.js');
+var getPostMainCategory = require('./modules/index/main-category-add.js');
 
 
 router.use(methodOverride(function(req, res){
@@ -99,7 +99,7 @@ router.get('/articles/:id/edit', function (req, res) {
             date = date.substring(0, date.indexOf('T'));
 
             res.format({
-                //HTML response will render the 'edit.jade' template
+                //HTML response will render the 'index.jade' template
                 html: function () {
                     res.render('edit-articles', {
                         title: 'Редактирование статьи  ' + article.title,
@@ -165,7 +165,7 @@ router.delete('/articles/:id/edit', function (req, res){
                     //Returning success messages saying it was deleted
                     //console.log('__________________DELETE removing ID: ' + oneArticle._id);
                     res.format({
-                        //HTML returns us back to the main page, or you can create a success page
+                        //HTML returns us back to the index page, or you can create a success page
                         html: function(){
                             res.redirect("/");
                         },

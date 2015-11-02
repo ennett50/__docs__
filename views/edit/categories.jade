@@ -1,0 +1,38 @@
+extends ../layout
+block vars
+	-var editTpl = true
+block content
+	h1= title
+
+
+
+	table.table.table-striped.table-bordered
+		tr
+			th Id
+			th Название
+			th Описание
+			th Картинка
+			th Дата
+			th(width=100)
+		-if (categories.length)
+			-each category in categories
+				tr
+					td= category._id
+					td= category.title
+					td= category.description
+					td
+						img(src="/uploads/#{category.img}" alt=category.title).img_max-200
+					-var date = category.created.toISOString();
+					td #{date.substring(0, date.indexOf('T'))} #{date.substring(date.indexOf('T')+1, date.indexOf('.'))}
+					td
+						a(href="/edit/category/#{category._id}") Edit
+						br
+						a(href="/edit/category/#{category._id}") Delete
+
+		-else
+			tr
+				td(colspan="6") Список категорий пуст
+
+
+	include ../modules/edit__add-categories
+

@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+//var Schema = mongoose.Schema;
+//var ObjectIdSchema = Schema.ObjectId;
+//var ObjectId = mongoose.Types.ObjectId;
 
 
 //поля для статей
@@ -28,7 +31,11 @@ var articleSchema = new mongoose.Schema({
 
 
 //поля для отображения главных категорий
-var mainCategory = new mongoose.Schema({
+var categoriesSchema = new mongoose.Schema({
+    activationId: {
+        type: mongoose.Schema.ObjectId,
+        default: mongoose.Types.ObjectId
+    },
     title: {
         type: String,
         required: true,
@@ -39,7 +46,7 @@ var mainCategory = new mongoose.Schema({
         required: true,
         unique: true
     },
-    icon_class: {
+    img: {
         type: String,
         required: true,
         unique: true
@@ -51,4 +58,4 @@ var mainCategory = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Article', articleSchema);
-module.exports = mongoose.model('mainCategory', mainCategory);
+module.exports = mongoose.model('categories', categoriesSchema);
