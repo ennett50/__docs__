@@ -1,2 +1,2 @@
 # Test Doc-project 
-Use in project: NodeJS, MongoDB with Mongoose, Bootstrap
+Use in project: NodeJS, MongoDB with Mongoose, Bootstrap and others
