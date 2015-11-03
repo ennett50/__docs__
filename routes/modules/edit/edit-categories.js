@@ -22,7 +22,7 @@ var editCategories = function (req, res, next) {
                     });
                 },
                 json: function () {
-                    res.json(subcategories);
+                    res.json(categories);
                 }
             });
 

@@ -20,7 +20,13 @@ var editDataSites = require('./modules/edit/index.js'),
     subCategories__List = require('./modules/index/detail-subcategories.js'),
     categories_edit = require('./modules/edit/edit-categories.js'),
     categories_put =  require('./modules/edit/put-categories.js'),
-    categories_delete = require('./modules/edit/delete-categories.js');
+    categories_delete = require('./modules/edit/delete-categories.js'),
+    subcategories_edit = require('./modules/edit/edit-subcategories.js'),
+    subcategories_put = require('./modules/edit/put-subcategories.js'),
+    subcategories_delete = require('./modules/edit/delete-subcategories.js'),
+    articles_edit = require('./modules/edit/edit-articles.js'),
+    articles_put = require('./modules/edit/put-articles.js'),
+    articles_delete = require('./modules/edit/delete-articles.js');
 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -100,16 +106,23 @@ router.get('/edit/', function(req, res){
     res.render('edit/index', { title: 'Редактирование данных'});
 });
 router.get('/edit/categories/', categories);
+router.post('/edit/categories/', addCategories);
 router.route('/edit/category/:id').get(categories_edit);
 router.route('/edit/category/:id').put(categories_put);
 router.route('/edit/category/:id').delete(categories_delete);
-router.post('/edit/categories/', addCategories);
 
 router.get('/edit/subcategories/', subcategories);
 router.post('/edit/subcategories/', addSubCategories);
+router.route('/edit/subcategory/:id').get(subcategories_edit);
+router.route('/edit/subcategory/:id').put(subcategories_put);
+router.route('/edit/subcategory/:id').delete(subcategories_delete);
 
 
 router.get('/edit/articles/', articles);
 router.post('/edit/articles/', addArticles);
+router.route('/edit/articles/:id').get(articles_edit);
+router.route('/edit/articles/:id').put(articles_put);
+router.route('/edit/articles/:id').delete(articles_delete);
+
 
 module.exports = router;

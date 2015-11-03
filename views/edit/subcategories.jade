@@ -19,7 +19,7 @@ block content
 				tr
 					td= category._id
 					td
-						a(href="/categories/#{category.category_id}" target="_blank")= category.category_name[0].title
+						a(href='/categories/#{category.category_id}', target='_blank')= category.category_name[0].title
 
 					td
 						a(href="/subcategories/#{category._id}" target="_blank")= category.title
@@ -35,9 +35,12 @@ block content
 					-var date = category.created.toISOString();
 					td #{date.substring(0, date.indexOf('T'))} #{date.substring(date.indexOf('T')+1, date.indexOf('.'))}
 					td
-						a(href="/edit/category/#{category._id}") Edit
+						a(href="/edit/subcategory/#{category._id}").btn.btn-info Редактировать
 						br
-						a(href="/edit/category/#{category._id}") Delete
+						br
+						form(action='/edit/subcategory/#{category._id}',method='post')
+							input(type='hidden',value='DELETE',name='_method')
+							button(type='submit').btn.btn-danger Удалить
 
 		-else
 			tr

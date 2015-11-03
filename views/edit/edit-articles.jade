@@ -1,0 +1,45 @@
+extends ../layout
+block vars
+	-var editTpl = true
+block content
+	div#add-articles
+		h3 Изменить статью - "#{title}"
+		form.form.form-add-article.well(method="POST" )
+			div.row
+				div.form-group.col-md-12.col-xs-12
+					label.control-label(for='title-articles') Название статьи
+					input#title-articles.form-control(type='text', name="titleArticles" required="" value=title)
+
+
+
+			div.row
+				div.form-group.col-md-6.col-xs-6
+					label.control-label(for='name-category') Выберите категорию
+					select#name-category(name="nameCategory" required="").form-control
+						option Выберите
+						-each category in categories
+							if (category._id == category_id)
+								option(value="#{category._id}" selected="")= category.title
+							else
+								option(value="#{category._id}")= category.title
+
+				div.form-group.col-md-6.col-xs-6
+					label.control-label(for='name-category') Выберите подкатегорию
+					select#name-category(name="nameSubCategory" required="").form-control
+						option Выберите
+						-console.log(subcategory_id)
+						-each subcategory in subcategories
+							if (subcategory._id == subcategory_id)
+								option(value="#{subcategory._id}" selected="")= subcategory.title
+							else
+								option(value="#{subcategory._id}")= subcategory.title
+
+			div.row
+				div.form-group.col-md-12.col-xs-12
+					label.control-label(for='link-articles') Ссылка статьи
+					input#link-articles.form-control(name="linkArticles" required="" value=link)
+
+			div.row
+				div.form-group.clearfix.col-md-12.col-xs-12
+					input(type='hidden',value='PUT',name='_method')
+					button.btn.btn-info(type='submit') Изменить статью

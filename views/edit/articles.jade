@@ -30,9 +30,14 @@ block content
 					-var date = article.created.toISOString();
 					td #{date.substring(0, date.indexOf('T'))} #{date.substring(date.indexOf('T') + 1, date.indexOf('.'))}
 					td
-						a(href="/edit/articles/#{article._id}") Edit
+
+						a(href="/edit/articles/#{article._id}").btn.btn-info Редактировать
 						br
-						a(href="/edit/articles/#{article._id}") Delete
+						br
+						form(action='/edit/articles/#{article._id}',method='post')
+							input(type='hidden',value='DELETE',name='_method')
+							button(type='submit').btn.btn-danger Удалить
+
 		-else
 			tr
 				td(colspan="5") Список статей пуст

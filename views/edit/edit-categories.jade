@@ -12,7 +12,8 @@ block content
 
 				div.form-group.col-md-6.col-xs-6
 					label.control-label(for='img-category') Картинка категории
-					p Текущая картинка - <b>#{img}</b>
+					if (img)
+						p Текущая картинка - <b>#{img}</b>
 					input#img-category(type='file' name="imgCategory" value=img)
 
 			div.row
